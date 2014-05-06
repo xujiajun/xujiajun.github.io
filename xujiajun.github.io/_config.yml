@@ -1,0 +1,8 @@
+name: Xujiajun Blog
+markdown: redcarpet
+pygments: true
+baseurl: /
+encoding: utf-8
+timezone: 'Asia/Shanghai'
+author: Xujiajun
+url: "http://xujiajun.cn"
