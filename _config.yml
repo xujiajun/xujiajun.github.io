@@ -1,7 +1,7 @@
 title:            Xujiajun Blog
 description:      Xujiajun'world
 url:              http://xujiajun.cn
-signoff:          # Your name.
+signoff:          Xujiajun
 disqus_shortname: xujiajunblog
 facebook_appid:   # appid for like button, remove from /_includes/share.html if unwanted.
 google_analytics: # set tracking, remove from /javascripts/basic.js if unwanted.
