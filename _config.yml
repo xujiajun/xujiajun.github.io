@@ -1,8 +1,8 @@
-title:            Scribble
-description:      A jekyll theme. Because I scribble.
-url:              # Site url.
+title:            Xujiajun Blog
+description:      Xujiajun'world
+url:              http://xujiajun.cn
 signoff:          # Your name.
-disqus_shortname: # disqus comment thread for post header options. ( leave blank if unwanted. )
+disqus_shortname: xujiajunblog
 facebook_appid:   # appid for like button, remove from /_includes/share.html if unwanted.
 google_analytics: # set tracking, remove from /javascripts/basic.js if unwanted.
 
@@ -10,13 +10,13 @@ links:
   - name:         About
     url:          /about
   - name:         Blog
-    url:          http://muan.co
+    url:          http://xujiajun.cn
     external:     true
   - name:         Email
-    url:          mailto:hello@muan.co
+    url:          mailto:me@xujiajun.cn
     external:     true
   - name:         GitHub
-    url:          http://github.com/muan
+    url:          http://github.com/xujiajun
     external:     true
 pygments:         true
 permalink:        pretty
