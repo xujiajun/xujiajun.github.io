@@ -11,7 +11,7 @@ links:
     url:          /about
   - name:         Blog
     url:          http://xujiajun.cn
-    external:     true
+    external:     false
   - name:         Email
     url:          mailto:me@xujiajun.cn
     external:     true
