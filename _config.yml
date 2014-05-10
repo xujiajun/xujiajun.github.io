@@ -1,0 +1,26 @@
+title:            Xujiajun Blog
+description:      Xujiajun'world
+url:              http://xujiajun.cn
+signoff:          # Your name.
+disqus_shortname: xujiajunblog
+facebook_appid:   # appid for like button, remove from /_includes/share.html if unwanted.
+google_analytics: # set tracking, remove from /javascripts/basic.js if unwanted.
+
+links:
+  - name:         About
+    url:          /about
+  - name:         Blog
+    url:          http://xujiajun.cn
+    external:     true
+  - name:         Email
+    url:          mailto:me@xujiajun.cn
+    external:     true
+  - name:         GitHub
+    url:          http://github.com/xujiajun
+    external:     true
+pygments:         true
+permalink:        pretty
+markdown:         redcarpet
+redcarpet:
+  extensions:
+    - smart
