@@ -7,9 +7,9 @@ disqus: y
 
 在最基本的层面，重要的是理解JavaScript的定时器是如何工作的。很多时候，他们的行为，因为单线程他们所处让我们先通过检查三项功能，这是我们有机会，可以构建和操作计时器的unintuitively。
 
-变种ID = setTimeout的（fn, delay）; -启动一个计时器延迟之后，将调用指定的函数。该函数返回一个唯一的ID与该定时器可以在以后的时间被取消。
-变种ID =的setInterval（fn, delay）; -类似的setTimeout但不断（每次有延迟）调用该函数，直到它被取消。
-clearInterval（ID） ，clearTimeout（ID）; -接受（通过上述函数返回），一个计时器ID和发生停止计时器回调。
+变种ID = setTimeout的（fn, delay）;启动一个计时器延迟之后，将调用指定的函数。该函数返回一个唯一的ID与该定时器可以在以后的时间被取消。
+变种ID =的setInterval（fn, delay）; 类似的setTimeout但不断（每次有延迟）调用该函数，直到它被取消。
+clearInterval（ID） ，clearTimeout（ID）; 接受（通过上述函数返回），一个计时器ID和发生停止计时器回调。
 为了了解定时器是如何工作的内部有一个需要探讨的一个重要的概念：计时器延迟得不到保证。由于在浏览器中的JavaScript的所有单个线程上异步事件（如鼠标点击和计时器）执行时，有一直在执行一个开口只运行。这是最好的证明用的图，如在以下内容：
 
 <img src="/images/427px-Timers.png"></img>
