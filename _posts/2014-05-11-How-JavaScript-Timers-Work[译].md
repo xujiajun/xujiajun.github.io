@@ -1,6 +1,6 @@
 ---
 layout: post
-title: How JavaScript Timers Work[译]
+title: How JavaScript Timers Work [译]
 date: 2014-05-11 17:27:31
 disqus: y
 ---
