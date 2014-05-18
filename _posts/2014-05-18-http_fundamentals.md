@@ -129,3 +129,106 @@ $request->getLanguages(); // an array of languages the client accepts
 
 {% endhighlight %}
 
+Like HTTP itself, the Request and Response objects are pretty simple. The hard part of building an application is writing what comes in between.换句话讲，中间的过程才是复杂的。
+
+Stay Organized
+
+对于路由“丑陋”写法：
+
+{% highlight PHP %}
+// index.php
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
+
+$request = Request::createFromGlobals();
+$path = $request->getPathInfo(); // the URI path being requested
+
+if (in_array($path, array('', '/'))) {
+    $response = new Response('Welcome to the homepage.');
+} elseif ($path == '/contact') {
+    $response = new Response('Contact us');
+} else {
+    $response = new Response('Page not found.', Response::HTTP_NOT_FOUND);
+}
+$response->send();
+
+{% endhighlight %}
+
+the Symfony Application Flow
+
+When you let Symfony handle each request, life is much easier. Symfony follows the same simple pattern for every request:
+<img src="/images/symfony2/request-flow.png"></img>
+传入的请求被路由解释并传递给控制器，返回函数响应的对象。
+
+您的网站的每个“页”是在不同的URL映射到不同的PHP功能的路由配置文件中定义。每个PHP函数的工作，称为控制器，是利用信息从请求-以及许多其他工具symfony让可用-创建并返回一个响应 对象。换句话说，控制器就是你的代码有云：这就是你理解的请求，并创建一个响应。
+
+就是这么简单！
+每个请求执行一个前端控制器文件;
+路由系统决定了哪些PHP函数应该基于你所创建的请求和路由的配置信息来执行;
+正确的PHP函数被执行时，在您的代码创建并返回相应的响应对象。
+
+A Symfony Request in Action
+
+routing configuration file like :
+{% highlight YAML %}
+YAML:
+# app/config/routing.yml
+contact:
+    path:     /contact
+    defaults: { _controller: AcmeDemoBundle:Main:contact }
+
+{% endhighlight %}
+
+MainController:
+
+{% highlight PHP %}
+// src/Acme/DemoBundle/Controller/MainController.php
+namespace Acme\DemoBundle\Controller;
+
+use Symfony\Component\HttpFoundation\Response;
+
+class MainController
+{
+    public function contactAction()
+    {
+        return new Response('<h1>Contact us!</h1>');
+    }
+}
+{% endhighlight %}
+
+Symfony2的：建立你的应用程序，而不是你的工具。¶
+
+现在你知道的任何应用程序的目标是解释每个传入的请求，并创建相应的响应。作为应用的增长，它变得更加困难，以保持你的代码组织和维护。不变的是，同样复杂的任务滚滚而来了一遍又一遍：坚持的东西到数据库，渲染和重复使用的模板，处理表单提交，发送电子邮件，验证用户输入和处理的安全性。
+好消息是，没有这些问题是独一无二的。symfony提供了一个完整的工具，允许你建立你的应用程序，而不是你的工具的框架。
+
+独立的工具：在Symfony2的组件¶：
+
+HttpFoundation -包含请求和响应类，以及其他类处理会话和文件上传;
+
+路由 -强大和快速的路由系统，它允许您将特定的URI（例如映射/接触），以如何的请求应该被处理（例如，执行一些信息contactAction（） 方法）;
+
+形式 -用于创建表单和处理表单提交一个全功能和灵活的框架;
+
+验证器 -一种用于创建有关数据的规则，然后验证用户提交的数据是否遵循这些规则;
+
+类加载器 -一个自动加载库，允许无需手动使用PHP类需要包含这些类文件;
+
+模板 -一个工具包，用于呈现模板，搬运模板继承（即模板装饰布局），并执行其他常见的模板任务;
+
+安全性 -一个强大的库，用于处理所有类型的安全的应用程序中;
+
+翻译 -在您的应用程序翻译字符串的框架。
+
+这些组件的每个人都被分离，并可以用于任何 PHP项目，无论是否使用Symfony2的框架。每一部分是由在需要更换和必要时可以使用。
+
+整的解决方案：Symfony2的框架¶
+
+那么，什么是对Symfony2框架？在Symfony2的框架是一个PHP库，实现了两个不同的任务：
+提供了一个选择的组件（即Symfony2的组件）和第三方库（例如的雨燕梅勒用于发送电子邮件）;
+提供合理的配置和“胶水”库，结合所有这些作品一起。
+该框架的目标是整合多个独立的工具，以便为开发人员提供一致的体验。甚至框架本身是一个Symfony2的束（即插件buddle），可配置或更换完全。
+Symfony2中提供了强大的工具集，用于快速开发Web应用程序而不强加在你的应用程序。普通用户可以通过使用Symfony2的分布，它提供了一个项目骨架合理的默认值开始迅速开发。对于高级玩家，the sky is the limit。
+
+translate by Xujiajun
+
+From:[Symfony.com](http://symfony.com/doc/current/book/http_fundamentals.html#the-full-solution-the-symfony2-framework)
