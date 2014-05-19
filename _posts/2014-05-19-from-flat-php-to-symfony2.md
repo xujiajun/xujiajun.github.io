@@ -12,6 +12,7 @@ If you've never used a PHP framework, aren't familiar with the MVC philosophy, o
 In this chapter, you'll write a simple application in flat PHP, and then refactor it to be more organized. You'll travel through time, seeing the decisions behind why web development has evolved over the past several years to where it is now.
 By the end, you'll see how Symfony2 can rescue you from mundane tasks and let you take back control of your code.
 A Simple Blog in Flat PHP¶
+
 In this chapter, you'll build the token blog application using only flat PHP. To begin, create a single page that displays blog entries that have been persisted to the database. Writing in flat PHP is quick and dirty:
 
 {% highlight PHP %}
@@ -277,8 +278,307 @@ With index.php as the front controller
 /index.php/show     => Blog post show page (index.php executed)
 {% endhighlight %}
 
+Tips:
+
+The index.php portion of the URI can be removed if using Apache rewrite rules (or equivalent). In that case, the resulting URI of the blog show page would be simply /show.
+
+When using a front controller, a single PHP file (index.php in this case) renders every request. For the blog post show page, /index.php/show will actually execute the index.php file, which is now responsible for routing requests internally based on the full URI. As you'll see, a front controller is a very powerful tool.
+
+Creating the Front Controller¶
+
+You're about to take a big step with the application. With one file handling all requests, you can centralize things such as security handling, configuration loading, and routing. In this application, index.php must now be smart enough to render the blog post list page or the blog post show page based on the requested URI:
+
+{% highlight PHP %}
+<?php
+// index.php
+
+// load and initialize any global libraries
+require_once 'model.php';
+require_once 'controllers.php';
+
+// route the request internally
+$uri = $_SERVER['REQUEST_URI'];
+if ('/index.php' == $uri) {
+    list_action();
+} elseif ('/index.php/show' == $uri && isset($_GET['id'])) {
+    show_action($_GET['id']);
+} else {
+    header('Status: 404 Not Found');
+    echo '<html><body><h1>Page Not Found</h1></body></html>';
+}
+?>
+{% endhighlight %}
+
+For organization, both controllers (formerly index.php and show.php) are now PHP functions and each has been moved into a separate file, controllers.php:
+
+{% highlight PHP %}
+<?php
+function list_action()
+{
+    $posts = get_all_posts();
+    require 'templates/list.php';
+}
+
+function show_action($id)
+{
+    $post = get_post_by_id($id);
+    require 'templates/show.php';
+}
+?>
+{% endhighlight %}
+
+As a front controller, index.php has taken on an entirely new role, one that includes loading the core libraries and routing the application so that one of the two controllers (the list_action() and show_action() functions) is called. In reality, the front controller is beginning to look and act a lot like Symfony2's mechanism for handling and routing requests.
+
+Tips:
+
+Another advantage of a front controller is flexible URLs. Notice that the URL to the blog post show page could be changed from /show to /read by changing code in only one location. Before, an entire file needed to be renamed. In Symfony2, URLs are even more flexible.
+
+By now, the application has evolved from a single PHP file into a structure that is organized and allows for code reuse. You should be happier, but far from satisfied. For example, the "routing" system is fickle, and wouldn't recognize that the list page (/index.php) should be accessible also via / (if Apache rewrite rules were added). Also, instead of developing the blog, a lot of time is being spent working on the "architecture" of the code (e.g. routing, calling controllers, templates, etc.). More time will need to be spent to handle form submissions, input validation, logging and security. Why should you have to reinvent solutions to all these routine problems?
+
+Add a Touch of Symfony2¶
 
 
+Symfony2 to the rescue. Before actually using Symfony2, you need to download it. This can be done by using Composer, which takes care of downloading the correct version and all its dependencies and provides an autoloader. An autoloader is a tool that makes it possible to start using PHP classes without explicitly including the file containing the class.
+
+In your root directory, create a composer.json file with the following content:
+
+{% highlight PHP %}
+
+{
+    "require": {
+        "symfony/symfony": "2.4.*"
+    },
+    "autoload": {
+        "files": ["model.php","controllers.php"]
+    }
+}
+
+{% endhighlight %}
+
+Next, download Composer and then run the following command, which will download Symfony into a vendor/ directory:
+
+{% highlight PHP %}
+$ php composer.phar install
+{% endhighlight %}
+
+Beside downloading your dependencies, Composer generates a vendor/autoload.php file, which takes care of autoloading for all the files in the Symfony Framework as well as the files mentioned in the autoload section of your composer.json.
 
 
+Core to Symfony's philosophy is the idea that an application's main job is to interpret each request and return a response. To this end, Symfony2 provides both a Request and a Response class. These classes are object-oriented representations of the raw HTTP request being processed and the HTTP response being returned. Use them to improve the blog:
 
+{% highlight PHP %}
+
+<?php
+// index.php
+require_once 'vendor/autoload.php';
+
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
+
+$request = Request::createFromGlobals();
+
+$uri = $request->getPathInfo();
+if ('/' == $uri) {
+    $response = list_action();
+} elseif ('/show' == $uri && $request->query->has('id')) {
+    $response = show_action($request->query->get('id'));
+} else {
+    $html = '<html><body><h1>Page Not Found</h1></body></html>';
+    $response = new Response($html, Response::HTTP_NOT_FOUND);
+}
+
+// echo the headers and send the response
+$response->send();
+?>
+{% endhighlight %}
+
+{New in version 2.4: Support for HTTP status code constants was introduced in Symfony 2.4.}
+
+The controllers are now responsible for returning a Response object. To make this easier, you can add a new render_template() function, which, incidentally, acts quite a bit like the Symfony2 templating engine:
+
+{% highlight PHP %}
+<?php
+// controllers.php
+use Symfony\Component\HttpFoundation\Response;
+
+function list_action()
+{
+    $posts = get_all_posts();
+    $html = render_template('templates/list.php', array('posts' => $posts));
+
+    return new Response($html);
+}
+
+function show_action($id)
+{
+    $post = get_post_by_id($id);
+    $html = render_template('templates/show.php', array('post' => $post));
+
+    return new Response($html);
+}
+
+// helper function to render templates
+function render_template($path, array $args)
+{
+    extract($args);
+    ob_start();
+    require $path;
+    $html = ob_get_clean();
+
+    return $html;
+}
+?>
+{% endhighlight %}
+
+By bringing in a small part of Symfony2, the application is more flexible and reliable. The Request provides a dependable way to access information about the HTTP request. Specifically, the getPathInfo() method returns a cleaned URI (always returning /show and never /index.php/show). So, even if the user goes to /index.php/show, the application is intelligent enough to route the request through show_action().
+
+The Response object gives flexibility when constructing the HTTP response, allowing HTTP headers and content to be added via an object-oriented interface. And while the responses in this application are simple, this flexibility will pay dividends as your application grows.
+
+The Sample Application in Symfony2¶
+
+The blog has come a long way, but it still contains a lot of code for such a simple application. Along the way, you've made a simple routing system and a method using ob_start() and ob_get_clean() to render templates. If, for some reason, you needed to continue building this "framework" from scratch, you could at least use Symfony's standalone Routing and Templating components, which already solve these problems.
+
+Instead of re-solving common problems, you can let Symfony2 take care of them for you. Here's the same sample application, now built in Symfony2:
+
+{% highlight PHP %}
+<?
+// src/Acme/BlogBundle/Controller/BlogController.php
+namespace Acme\BlogBundle\Controller;
+
+use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+
+class BlogController extends Controller
+{
+    public function listAction()
+    {
+        $posts = $this->get('doctrine')
+            ->getManager()
+            ->createQuery('SELECT p FROM AcmeBlogBundle:Post p')
+            ->execute();
+
+        return $this->render(
+            'AcmeBlogBundle:Blog:list.html.php',
+            array('posts' => $posts)
+        );
+    }
+
+    public function showAction($id)
+    {
+        $post = $this->get('doctrine')
+            ->getManager()
+            ->getRepository('AcmeBlogBundle:Post')
+            ->find($id);
+
+        if (!$post) {
+            // cause the 404 page not found to be displayed
+            throw $this->createNotFoundException();
+        }
+
+        return $this->render(
+            'AcmeBlogBundle:Blog:show.html.php',
+            array('post' => $post)
+        );
+    }
+}
+?>
+{% endhighlight %}
+
+The two controllers are still lightweight. Each uses the Doctrine ORM library to retrieve objects from the database and the Templating component to render a template and return a Response object. The list template is now quite a bit simpler:
+
+{% highlight PHP %}
+<!-- src/Acme/BlogBundle/Resources/views/Blog/list.html.php -->
+<?php $view->extend('::layout.html.php') ?>
+
+<?php $view['slots']->set('title', 'List of Posts') ?>
+
+<h1>List of Posts</h1>
+<ul>
+    <?php foreach ($posts as $post): ?>
+    <li>
+        <a href="<?php echo $view['router']->generate(
+            'blog_show',
+            array('id' => $post->getId())
+        ) ?>">
+            <?php echo $post->getTitle() ?>
+        </a>
+    </li>
+    <?php endforeach; ?>
+</ul>
+{% endhighlight %}
+
+The layout is nearly identical:
+
+{% highlight PHP %}
+<!-- app/Resources/views/layout.html.php -->
+<!DOCTYPE html>
+<html>
+    <head>
+        <title><?php echo $view['slots']->output(
+            'title',
+            'Default title'
+        ) ?></title>
+    </head>
+    <body>
+        <?php echo $view['slots']->output('_content') ?>
+    </body>
+</html>
+{% endhighlight %}
+
+Tips:The show template is left as an exercise, as it should be trivial to create based on the list template.
+
+When Symfony2's engine (called the Kernel) boots up, it needs a map so that it knows which controllers to execute based on the request information. A routing configuration map provides this information in a readable format:
+
+{% highlight PHP %}
+
+# app/config/routing.yml
+blog_list:
+    path:     /blog
+    defaults: { _controller: AcmeBlogBundle:Blog:list }
+
+blog_show:
+    path:     /blog/show/{id}
+    defaults: { _controller: AcmeBlogBundle:Blog:show }
+
+{% endhighlight %}
+
+Now that Symfony2 is handling all the mundane tasks, the front controller is dead simple. And since it does so little, you'll never have to touch it once it's created (and if you use a Symfony2 distribution, you won't even need to create it!):
+
+
+{% highlight PHP %}
+
+// web/app.php
+require_once __DIR__.'/../app/bootstrap.php';
+require_once __DIR__.'/../app/AppKernel.php';
+
+use Symfony\Component\HttpFoundation\Request;
+
+$kernel = new AppKernel('prod', false);
+$kernel->handle(Request::createFromGlobals())->send();
+
+{% endhighlight %}
+
+
+The front controller's only job is to initialize Symfony2's engine (Kernel) and pass it a Request object to handle. Symfony2's core then uses the routing map to determine which controller to call. Just like before, the controller method is responsible for returning the final Response object. There's really not much else to it.
+For a visual representation of how Symfony2 handles each request, see the request flow diagram.
+
+Where Symfony2 Delivers¶
+
+In the upcoming chapters, you'll learn more about how each piece of Symfony works and the recommended organization of a project. For now, have a look at how migrating the blog from flat PHP to Symfony2 has improved life:
+
+Your application now has clear and consistently organized code (though Symfony doesn't force you into this). This promotes reusability and allows for new developers to be productive in your project more quickly;
+
+100% of the code you write is for your application. You don't need to develop or maintain low-level utilities such as autoloading, routing, or rendering controllers;
+
+Symfony2 gives you access to open source tools such as Doctrine and the Templating, Security, Form, Validation and Translation components (to name a few);
+
+The application now enjoys fully-flexible URLs thanks to the Routing component;
+
+Symfony2's HTTP-centric architecture gives you access to powerful tools such as HTTP caching powered by Symfony2's internal HTTP cache or more powerful tools such as Varnish. This is covered in a later chapter all about caching.
+
+And perhaps best of all, by using Symfony2, you now have access to a whole set of high-quality open source tools developed by the Symfony2 community! A good selection of Symfony2 community tools can be found on KnpBundles.com.
+
+Better Templates¶
+
+If you choose to use it, Symfony2 comes standard with a templating engine called Twig that makes templates faster to write and easier to read. It means that the sample application could contain even less code! Take, for example, the list template written in Twig
+
+From:http://symfony.com/doc/current/book/from_flat_php_to_symfony2.html
