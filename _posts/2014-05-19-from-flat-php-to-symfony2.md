@@ -5,15 +5,13 @@ date: 2014-05-19 7:39:31
 disqus: y
 ---
 
-Why is Symfony2 better than just opening up a file and writing flat PHP?
+为什么Symfony2比打开一个文件纯粹写PHP更好呢？
 
-If you've never used a PHP framework, aren't familiar with the MVC philosophy, or just wonder what all the hype is around Symfony2, this chapter is for you. Instead of telling you that Symfony2 allows you to develop faster and better software than with flat PHP, you'll see for yourself.
+如果您从未使用过PHP框架，不熟悉MVC的理念，或者只是想知道所有围绕Symfony2中，这一章是给你的。Symfony2会让你开发得更快。
 
-In this chapter, you'll write a simple application in flat PHP, and then refactor it to be more organized. You'll travel through time, seeing the decisions behind why web development has evolved over the past several years to where it is now.
-By the end, you'll see how Symfony2 can rescue you from mundane tasks and let you take back control of your code.
-A Simple Blog in Flat PHP¶
+在本章中，你会用纯PHP一个简单的应用程序，然后重构它更有条理。你会穿越时间，看到后面为什么web开发已经发展了近几年的地方，现在是作出决定。截至去年底，你将看到如何Symfony2中可以从平凡的工作拯救你，让你收回你的代码控制。一个简单的博客作为例子来讲述本章节¶
 
-In this chapter, you'll build the token blog application using only flat PHP. To begin, create a single page that displays blog entries that have been persisted to the database. Writing in flat PHP is quick and dirty:
+在本章中，你将只使用PHP写一个博客应用程序。首先，创建一个显示已保存到数据库博客条目的单个页面，当然这个方式有点"quick and dirty"。：
 
 {% highlight PHP %}
 <?php
