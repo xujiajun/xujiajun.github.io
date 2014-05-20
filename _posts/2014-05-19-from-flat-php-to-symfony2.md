@@ -60,6 +60,18 @@ Isolating the Presentation¶
 
 The code can immediately gain from separating the application "logic" from the code that prepares the HTML "presentation":
 
+这是快写，快执行，而且，正如你的应用程序的增长，不可能维持。需要解决几个问题：
+
+没有错误检查：如果有什么连接到数据库失败？组织不力：如果应用程序的增长，这种单一的文件将变得越来越难以维护。你应该在哪里把代码来处理表单提交？你怎么能验证数据？应该在哪里编写代码去发送电子邮件？很难重用代码：既然一切都在一个文件中，有没有办法再用任何部分申请了博客的其他“页”的。
+
+温馨提示：
+
+这里没有提到的另一个问题是，数据库连接到MySQL的。虽然这里没有涉及，Symfony2的完全集成 Doctrine，致力于数据库抽象和映射库。
+
+隔离演示¶
+
+该代码可以立即从该准备的HTML“简报”中的代码分离应用程序的“逻辑”获得：
+
 {% highlight PHP %}
 <?php
 // index.php
