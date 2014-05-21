@@ -61,5 +61,87 @@ path/to/webroot/ <- your web server directory (sometimes named htdocs or public)
             ...
 {% endhighlight %}
 
+Option 2) Download an Archive¶
 
+You can also download an archive of the Standard Edition. Here, you'll need to make two choices:
+Download either a .tgz or .zip archive - both are equivalent, download whatever you're more comfortable using;
+
+Download the distribution with or without vendors. If you're planning on using more third-party libraries or bundles and managing them via Composer, you should probably download "without vendors".
+Download one of the archives somewhere under your local web server's root directory and unpack it. From a UNIX command line, this can be done with one of the following commands (replacing ### with your actual filename):
+
+
+{% highlight PHP %}
+# for .tgz file
+$ tar zxvf Symfony_Standard_Vendors_2.4.###.tgz
+
+# for a .zip file
+$ unzip Symfony_Standard_Vendors_2.4.###.zip
+{% endhighlight %}
+
+If you've downloaded "without vendors", you'll definitely need to read the next section.
+
+Tips:
+
+You can easily override the default directory structure. See How to override Symfony's Default Directory Structure for more information.
+
+All public files and the front controller that handles incoming requests in a Symfony2 application live in the Symfony/web/ directory. So, assuming you unpacked the archive into your web server's or virtual host's document root, your application's URLs will start with http://localhost/Symfony/web/.
+
+The following examples assume you don't touch the document root settings so all URLs start with http://localhost/Symfony/web/
+
+Updating Vendors¶
+
+At this point, you've downloaded a fully-functional Symfony project in which you'll start to develop your own application. A Symfony project depends on a number of external libraries. These are downloaded into the vendor/ directory of your project via a library called Composer.
+
+Depending on how you downloaded Symfony, you may or may not need to update your vendors right now. But, updating your vendors is always safe, and guarantees that you have all the vendor libraries you need.
+
+Step 1: Get Composer (The great new PHP packaging system)
+
+{% highlight PHP %}
+$ curl -s http://getcomposer.org/installer | php
+{% endhighlight %}
+
+Make sure you download composer.phar in the same folder where the composer.json file is located (this is your Symfony project root by default).
+
+Step 2: Install vendors
+
+{% highlight PHP %}
+$ php composer.phar install
+{% endhighlight %}
+
+This command downloads all of the necessary vendor libraries - including Symfony itself - into the vendor/ directory.
+
+If you don't have curl installed, you can also just download the installer file manually at http://getcomposer.org/installer. Place this file into your project and then run:
+
+{% highlight PHP %}
+$ php installer
+$ php composer.phar install
+{% endhighlight %}
+
+
+Tips:
+
+When running php composer.phar install or php composer.phar update, Composer will execute post install/update commands to clear the cache and install assets. By default, the assets will be copied into your web directory.
+Instead of copying your Symfony assets, you can create symlinks if your operating system supports it. To create symlinks, add an entry in the extra node of your composer.json file with the key symfony-assets-install and the value symlink:
+
+{% highlight PHP %}
+"extra": {
+    "symfony-app-dir": "app",
+    "symfony-web-dir": "web",
+    "symfony-assets-install": "symlink"
+}
+{% endhighlight %}
+
+When passing relative instead of symlink to symfony-assets-install, the command will generate relative symlinks.
+
+Configuration and Setup¶
+
+At this point, all of the needed third-party libraries now live in the vendor/ directory. You also have a default application setup in app/ and some sample code inside the src/ directory.
+
+Symfony2 comes with a visual server configuration tester to help make sure your Web server and PHP are configured to use Symfony. Use the following URL to check your configuration:
+
+{% highlight PHP %}
+http://localhost/config.php
+{% endhighlight %}
+
+If there are any issues, correct them now before moving on.
 
