@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Installing and Configuring Symfony [第3天]
+title: 安装和配置SYMFONY [第3天]
 date: 2014-05-20 7:39:31
 disqus: y
 ---
