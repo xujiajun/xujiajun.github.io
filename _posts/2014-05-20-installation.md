@@ -24,6 +24,22 @@ Option 1) Composer¶
 Composer is a dependency management library for PHP, which you can use to download the Symfony2 Standard Edition.
 Start by downloading Composer anywhere onto your local computer. If you have curl installed, it's as easy as:
 
+本章的目标是让你和运行与建立在Symfony的顶部工作的应用程序。幸运的是，Symfony的提供了“分布”，这是你可以下载并立即开始开发在功能Symfony的“启动器”项目。
+
+温馨提示：
+
+如果你正在寻找如何最好地创建一个新的项目，它通过源代码控制存储，请参阅使用源代码控制指令。
+
+安装Symfony2的分布¶
+
+温馨提示：
+
+首先，检查是否已安装并配置PHP的Web服务器（例如Apache）。有关Symfony2的要求的详细信息，请参阅需求参考。
+
+Symfony2的包“分配”，这是全功能的应用程序，其中包括Symfony2的核心库，选择有用的包，一个合理的目录结构和一些默认配置。当您下载Symfony2的分布，你下载了可以马上用来开始开发你的应用程序的功能的应用程序框架。首先访问Symfony2的下载页面http://symfony.com/download。在这个页面，你会看到Symfony的标准版，这是主要的Symfony2的分布。有2种方法让你的项目开始：
+
+选项​​1)Composer是一个PHP依赖管理库，你可以用它来下载Symfony2的标准版。首先，在任何地方下载Composer到您的本地计算机上。如果你已经安装了curl，它一样容易：
+
 {% highlight PHP %}
 $ curl -s https://getcomposer.org/installer | php
 {% endhighlight %}
