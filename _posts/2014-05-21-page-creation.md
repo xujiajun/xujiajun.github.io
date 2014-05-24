@@ -67,6 +67,23 @@ A bundle is nothing more than a directory that houses everything related to a sp
 
 To create a bundle called AcmeHelloBundle (a play bundle that you'll build in this chapter), run the following command and follow the on-screen instructions (use all of the default options):
 
+其实，你就可以与被招呼任何其他名称代替Symfony的。要创建该页面，按照简单的两步过程。
+
+温馨提示：
+
+本教程假设您已经下载Symfony2中并配置您的网络服务器。上面的URL假设本地主机指向你的新Symfony2的项目的web目录。有关此过程的详细信息，请参阅您所使用的Web服务器上的文档。下面是你可能会使用一些Web服务器的相关文档页面：
+
+对于Apache HTTP服务器，请参考Apache的文档的DirectoryIndex
+
+nginx的，请参考Nginx的HttpCoreModule位置的文档
+
+开始之前：创建捆绑¶
+
+在开始之前，你需要创建一个包。在Symfony2中，捆绑就像是一个插件，但一切都在你的应用程序的代码会活得包内。
+
+一个bundle无非是，里面的一切关系到一个特定的功能，包括PHP类，配置，甚至是样式表和JavaScript文件（见捆系统）的目录。
+
+要创建一个名为AcmeHelloBundle（一出戏包，你将构建本章中）包，请运行以下命令，然后按照屏幕上的说明（使用所有的默认选项）：
 
 {% highlight PHP %}
 $ php app/console generate:bundle --namespace=Acme/HelloBundle --format=yml
