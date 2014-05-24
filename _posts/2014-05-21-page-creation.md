@@ -26,6 +26,24 @@ The "Hello Symfony!" Page¶
 
 Start by building a spin-off of the classic "Hello World!" application. When you're finished, the user will be able to get a personal greeting (e.g. "Hello Symfony") by going to the following URL:
 
+在Symfony2中创建一个新的页面是一个简单的过程分为两个步骤：创建一个路由：路由定义的URL（例如，/约）到您的网页，并指定一个控制器（这是一个PHP函数）Symfony2中应该执行时的URL传入的​​请求匹配的路由路径;
+
+创建一个控制器：控制器是一个PHP函数，它接受传入的请求，并把它转换成的返回给用户的Symfony2的Response对象。这种简单的方法就是美丽的，因为它的网络的工作方式相匹配。Web上的每一次互动是通过一个HTTP请求初始化。您的应用程序的任务就是解释请求并返回相应的HTTP响应。
+
+Symfony2中遵循这一理念，为您提供了工具和公约，让您的应用程序组织，因为它生长在用户和复杂性。
+
+环境与前端控制器¶
+
+Symfony的每一个应用程序内的环境中运行。的环境是一组特定的配置和装载的束，用字符串表示。相同的应用程序可以具有不同的结构通过运行该应用程序在不同的环境中运行。Symfony2中自带的定义三种环境 - 开发，测试和督促 - 但你可以创建自己的为好。环境是允许一个应用程序有内置的调试和优化速度生产环境中的开发环境非常有用。您还可以加载基于所选的特定环境捆。例如，Symfony2中自带的WebProfilerBundle（下面描述），使只在开发和测试环境。
+
+Symfony2的带有两个Web访问的前端控制器：app_dev.php提供了开发环境，并app.php提供prod环境。所有的web访问Symfony2的正常穿越这些前端控制器中的一个。（测试环境通常只运行单元测试时使用的，所以没有一个专用的前端控制器的控制台工具还提供了可与任何环境中使用一个前端控制器。）
+
+当前端控制器初始化内核，它提供两个参数：环境，以及在调试模式下的内核是否应该运行。为了使您的应用程序响应速度更快，Symfony2的维护应用程序/缓存/目录下的缓存。当启用了调试模式（如app_dev.php确实在默认情况下），这个缓存是每当你修改任何代码或配置自动刷新。在调试模式下运行时，Symfony2的运行速度较慢，但​​您所做的更改，而不必手动清除缓存反映。
+
+在“你好Symfony的！”页面¶
+
+首先建立一个分拆的经典的“Hello World！”应用程序。当你完成后，用户将可以通过访问以下网址获得个人问候语（如“你好Symfony的”）：
+
 {% highlight PHP %}
 http://localhost/app_dev.php/hello/Symfony
 {% endhighlight %}
