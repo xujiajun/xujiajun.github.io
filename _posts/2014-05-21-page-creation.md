@@ -115,6 +115,16 @@ If you look at the main routing file, you'll see that Symfony already added an e
 
 YAML:
 
+现在，你有一个捆绑的设置，你就可以开始构建你的应用程序的包内。
+
+步骤1：创建路由¶
+
+默认情况下，在Symfony2中应用的路由配置文件位于应用程序/配置/ routing.yml中。像Symfony2的所有配置，你也可以选择使用XML或PHP的开箱即用配置的路由。
+
+如果你看看主路由文件，你会看到，Symfony的已经加入你的时候产生的AcmeHelloBundle的条目：
+
+YAML：
+
 {% highlight PHP %}
 # app/config/routing.yml
 acme_hello:
