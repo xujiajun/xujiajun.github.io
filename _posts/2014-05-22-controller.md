@@ -80,3 +80,100 @@ line 6: The class name is the concatenation of a name for the controller class (
 line 8: Each action in a controller class is suffixed with Action and is referenced in the routing configuration by the action's name (index). In the next section, you'll create a route that maps a URI to this action. You'll learn how the route's placeholders ({name}) become arguments to the action method ($name).
 line 10: The controller creates and returns a Response object.
 
+Mapping a URL to a Controller¶
+
+The new controller returns a simple HTML page. To actually view this page in your browser, you need to create a route, which maps a specific URL path to the controller:
+
+YAML:
+
+{% highlight PHP %}
+	# app/config/routing.yml
+	hello:
+	    path:      /hello/{name}
+	    defaults:  { _controller: AcmeHelloBundle:Hello:index }
+{% endhighlight %}
+
+Notice the syntax used to refer to the controller: AcmeHelloBundle:Hello:index. Symfony2 uses a flexible string notation to refer to different controllers. This is the most common syntax and tells Symfony2 to look for a controller class called HelloController inside a bundle named AcmeHelloBundle. The method indexAction() is then executed.
+
+For more details on the string format used to reference different controllers, see Controller Naming Pattern.
+
+Tips:
+
+This example places the routing configuration directly in the app/config/ directory. A better way to organize your routes is to place each route in the bundle it belongs to. For more information on this, see Including External Routing Resources.
+
+You can learn much more about the routing system in the Routing chapter.
+
+Route Parameters as Controller Arguments¶
+
+You already know that the _controller parameter AcmeHelloBundle:Hello:index refers to a HelloController::indexAction() method that lives inside the AcmeHelloBundle bundle. What's more interesting is the arguments that are passed to that method:
+
+{% highlight PHP %}
+
+// src/Acme/HelloBundle/Controller/HelloController.php
+namespace Acme\HelloBundle\Controller;
+
+use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+
+class HelloController extends Controller
+{
+    public function indexAction($name)
+    {
+      // ...
+    }
+}
+
+{% endhighlight %}
+
+The controller has a single argument, $name, which corresponds to the {name} parameter from the matched route (ryan in the example). In fact, when executing your controller, Symfony2 matches each argument of the controller with a parameter from the matched route. Take the following example:
+
+YAML:
+
+{% highlight PHP %}
+
+# app/config/routing.yml
+hello:
+    path:      /hello/{firstName}/{lastName}
+    defaults:  { _controller: AcmeHelloBundle:Hello:index, color: green }
+
+{% endhighlight %}
+
+The controller for this can take several arguments:
+
+{% highlight PHP %}
+
+public function indexAction($firstName, $lastName, $color)
+{
+    // ...
+}
+
+{% endhighlight %}
+
+Notice that both placeholder variables ({firstName}, {lastName}) as well as the default color variable are available as arguments in the controller. When a route is matched, the placeholder variables are merged with the defaults to make one array that's available to your controller.
+
+Mapping route parameters to controller arguments is easy and flexible. Keep the following guidelines in mind while you develop.
+
+The order of the controller arguments does not matter
+
+Symfony is able to match the parameter names from the route to the variable names in the controller method's signature. In other words, it realizes that the {lastName} parameter matches up with the $lastName argument. The arguments of the controller could be totally reordered and still work perfectly:
+
+{% highlight PHP %}
+
+public function indexAction($lastName, $color, $firstName)
+{
+    // ...
+}
+
+{% endhighlight %}
+
+Each required controller argument must match up with a routing parameter
+
+The following would throw a RuntimeException because there is no foo parameter defined in the route:
+
+{% highlight PHP %}
+
+public function indexAction($firstName, $lastName, $color, $foo)
+{
+    // ...
+}
+
+{% endhighlight %}
