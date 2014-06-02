@@ -38,7 +38,7 @@ Start by downloading Composer anywhere onto your local computer. If you have cur
 
 Symfony2的包“分配”，这是全功能的应用程序，其中包括Symfony2的核心库，选择有用的包，一个合理的目录结构和一些默认配置。当您下载Symfony2的分布，你下载了可以马上用来开始开发你的应用程序的功能的应用程序框架。首先访问Symfony2的下载页面http://symfony.com/download。在这个页面，你会看到Symfony的标准版，这是主要的Symfony2的分布。有2种方法让你的项目开始：
 
-选项​​1)Composer是一个PHP依赖管理库，你可以用它来下载Symfony2的标准版。首先，在任何地方下载Composer到您的本地计算机上。如果你已经安装了curl，它一样容易：
+选项​​1)Composer是一个PHP依赖管理库，你可以用它来下载Symfony2的标准版。首先，在任何地方下载Composer到您的本地计算机上。如果你已经安装了curl：
 
 {% highlight PHP %}
 $ curl -s https://getcomposer.org/installer | php
