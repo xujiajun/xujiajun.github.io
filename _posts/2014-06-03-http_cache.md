@@ -93,6 +93,8 @@ The cache kernel has a special getLog() method that returns a string representat
 
 The AppCache object has a sensible default configuration, but it can be finely tuned via a set of options you can set by overriding the getOptions() method:
 
+{% highlight PHP %}
+<?php
 	// app/AppCache.php
 	use Symfony\Bundle\FrameworkBundle\HttpCache\HttpCache;
 
@@ -111,6 +113,9 @@ The AppCache object has a sensible default configuration, but it can be finely t
 	        );
 	    }
 	}
+?>
+{% endhighlight %}
+
 
 Tips:
 
