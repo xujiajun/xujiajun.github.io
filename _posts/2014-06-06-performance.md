@@ -19,6 +19,13 @@ By default, the Symfony2 standard edition uses Composer's autoloader in the auto
 Unfortunately, this comes at a cost, as the loader iterates over all configured namespaces to find a particular file, making file_exists calls until it finally finds the file it's looking for.
 The simplest solution is to tell Composer to build a "class map" (i.e. a big array of the locations of all the classes). This can be done from the command line, and might become part of your deploy process:
 
+{% highlight PHP %}
  $ php composer.phar dump-autoload --optimize
+{% endhighlight %}
 
 Internally, this builds the big class map array in vendor/composer/autoload_classmap.php.
+
+Caching the Autoloader with APC¶
+
+Another solution is to cache the location of each class after it's located the first time. Symfony comes with a class - ApcClassLoader - that does exactly this. To use it, just adapt your front controller file. If you're using the Standard Distribution, this code should already be available as comments in this file:
+
