@@ -6,3 +6,5 @@ disqus: y
 ---
 
 today i leraned sth about refactoring.
+
+extract method
