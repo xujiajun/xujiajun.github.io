@@ -3,7 +3,6 @@ description:      Xujiajun'world
 url:              http://xujiajun.cn
 signoff:          Xujiajun
 disqus_shortname: xujiajunblog
-# facebook_appid:   # appid for like button, remove from /_includes/share.html if unwanted.
 # google_analytics: UA-50872992-1
 
 links:
