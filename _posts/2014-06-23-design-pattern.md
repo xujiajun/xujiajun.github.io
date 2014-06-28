@@ -1,6 +1,6 @@
 ---
 layout: post
-title: 学习设计模式（第一天）
+title: 学习设计模式[第1天]
 date: 2014-06-28 8:35:37
 disqus: y
 ---
