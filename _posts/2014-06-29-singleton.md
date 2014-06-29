@@ -69,6 +69,9 @@ public class Singleton {
 参考
 
 Wikipedia: [单例模式](http://zh.wikipedia.org/wiki/%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F)
+
 Wikipedia: [Singleton pattern](http://en.wikipedia.org/wiki/Singleton_pattern)
+
 PHP设计模式笔记：[使用PHP实现单例模式](http://www.phppan.com/2010/06/php-design-pattern-6-singleton/)
+
 设计模式详解及PHP实现：[单例模式](http://yansu.org/2014/04/19/sigleton-design-pattern.html)
