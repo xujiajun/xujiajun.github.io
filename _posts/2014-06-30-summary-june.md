@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Summary of June
-date: 2014-06-29 8:35:37
+date: 2014-06-30 8:35:37
 disqus: y
 ---
 this June i learned a lot about Software engineering.like design pattern,refactor,unitTest etc.
