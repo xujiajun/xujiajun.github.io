@@ -12,6 +12,10 @@ disqus: y
 具体责任(Concrete Responsibility)角色：以抽象责任接口实现的具体责任
 责任链(Chain of responsibility)角色：设定责任的调用规则
 
+
+实例
+
+
 {% highlight PHP %}
 
 <?php
