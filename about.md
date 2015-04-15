@@ -3,12 +3,12 @@ layout: page
 title: About
 ---
 
-<img src="/images/me.jpg"></img>
+<img style="height:290px;" src="/images/me.jpg"></img>
 
-Hi,my name is Xu JiaJun (徐佳军).
+Hi,我叫徐佳军(网名xujiajun).
 
-And you can call me Johnny.  i'm a web developer,welcome to my world.
+欢迎来到我的博客.
 
-Tweet at [@xujiajun_cn](http://twitter.com/xujiajun_cn), read my code on [GitHub](http://github.com/xujiajun).
+目前在做的项目：[superu.org](http://superu.org)
 
 have a nice day. ♥
