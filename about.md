@@ -7,8 +7,8 @@ title: About
 
 Hi,我叫徐佳军(网名xujiajun).
 
-欢迎来到我的博客.
+目前在杭州一家创业公司担任技术合伙人兼CTO.
 
-目前在做的项目：[superu.org](http://superu.org)
+欢迎来到我的博客.
 
 have a nice day. ♥
