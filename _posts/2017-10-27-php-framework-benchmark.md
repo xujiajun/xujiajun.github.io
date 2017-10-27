@@ -5,14 +5,21 @@ date: 2017-10-27 11:27:31
 disqus: y
 ---
 
+我最近在给[tastphp](https://github.com/tastphp) 完善说明文档 有一节是[性能测试比较](https://github.com/tastphp/tastphp-docs/blob/master/zh/xing-neng.md) ,才有了下面这个项目
+
 项目托管地址: https://github.com/xujiajun/php-framework-benchmark
+
+针对github上比较活跃的几个开源项目，做了简单的比较。供大家参考：
 
 
 php framework benchmark (include [laravel](https://github.com/laravel/laravel)、[symfony](https://github.com/symfony/symfony)、[silex](https://github.com/silexphp/Silex)、[lumen](https://github.com/laravel/lumen)、[slim](https://github.com/slimphp/Slim)、[yii2](https://github.com/yiisoft/yii2)、[tastphp](https://github.com/tastphp/tastphp))
 
-All framework response "ok" benchmark.
+所有框架仅输出 "ok",就仅测试框架的本身的性能。如果有精力可以测下带有数据库交互的测试。
 
-### Test benchmark environment
+以下测试仅供参考，如果你想测的准，建议在生产环境测试！
+
+
+### 测试的环境
 
 ```
 OS Name:        Mac OS X
@@ -23,7 +30,7 @@ RAM：8 GB
 PHP version 7.1.10
 ```
 
-### Framework version
+### 各个框架的版本
 
 ```
 Laravel version 5.5.0
@@ -36,7 +43,7 @@ Tastphp version 1.3.6
 ```
 
 
-### Result
+### 测试结果
 
 <img src="https://raw.githubusercontent.com/xujiajun/php-framework-benchmark/master/imgs/php-framework-vs.png">
 
