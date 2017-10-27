@@ -5,7 +5,7 @@ title: About
 
 <img style="height:290px;" src="/images/me.jpg">
 
-Hi，我叫徐佳军(网名xujiajun)，非著名程序员，一个孩子的爸爸。
+Hi，我叫徐佳军(网名xujiajun)。
 
 目前担任杭州持码网络科技有限公司技术合伙人兼CTO。
 
