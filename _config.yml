@@ -1,14 +1,14 @@
 title:            Xujiajun Blog
-description:      Xujiajun'world
+description:      Xujiajun Blog
 url:              https://xujiajun.cn
 signoff:          Xujiajun
 disqus_shortname: xujiajunblog
 
 links:
   - name:         About
-    url:          /about
+    url:          /about/
   - name:         Blog
-    url:          https://xujiajun.cn
+    url:          /
     external:     false
   - name:         Email
     url:          mailto:me@xujiajun.cn
