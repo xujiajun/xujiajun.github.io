@@ -8,7 +8,7 @@ links:
   - name:         About
     url:          /about
   - name:         Blog
-    url:          http://xujiajun.cn
+    url:          https://xujiajun.github.io
     external:     false
   - name:         Email
     url:          mailto:me@xujiajun.cn
