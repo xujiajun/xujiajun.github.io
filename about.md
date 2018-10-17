@@ -16,7 +16,8 @@ The RESTful Web API framework for Java
 * <a href="https://github.com/xujiajun/gorouter" target="__blank">gorouter</a> 
 A simple and fast HTTP router for Go
 * <a href="https://github.com/xujiajun/godbal" target="__blank">godbal</a> Database Abstraction Layer (dbal) for go. Support SQL builder and get result easily (now only support mysql)
-
+* <a href="https://github.com/xujiajun/gotokenizer" target="__blank">gotokenizer</a> 
+A tokenizer based on the dictionary and Bigram language models for Golang. (Now only support chinese segmentation)
 
 欢迎来到我的博客与我交流。
 
