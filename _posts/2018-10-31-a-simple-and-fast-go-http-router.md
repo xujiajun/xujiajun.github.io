@@ -29,7 +29,7 @@ disqus: y
 用了数据结构压缩 Trie
 
 ## Features：
-Fast - see benchmarks
+* Fast - see [benchmarks](https://github.com/xujiajun/gorouter#benchmarks)
 * URL parameters
 * Regex parameters
 * Routes groups
