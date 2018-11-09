@@ -19,7 +19,7 @@ disqus: y
 
 * 1、开发一个 http router 完整思路（至少 4 种实现方式）。
 
-* 2、[https://github.com/xujiajun/gorouter](https://github.com/xujiajun/gorouter) 源码的详细解读（为了照顾新手，我是逐行分析的），具备一定二次开发 xujiajun/gorouter 的能力。
+* 2、[https://github.com/xujiajun/gorouter](https://github.com/xujiajun/gorouter) 源码的详细解读（为了照顾新手，我是逐行分析的），具备一定二次开发 [xujiajun/gorouter](https://github.com/xujiajun/gorouter) 的能力。
 
 另外直播的时候有人问我的个人微信，当时手机有点卡，很遗憾，没有放出来。我这边也贴下 vx：xujiajun1234567 ，一起学 go 的或者视频中有问题都可以加我。备注:golang
 
