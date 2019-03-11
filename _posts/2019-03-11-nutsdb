@@ -1,0 +1,21 @@
+---
+layout: post
+title: NutsDB, 高性能内嵌型KV数据库支持事务和多种数据结构
+disqus: y
+---
+
+NutsDB是纯Go语言编写一个简单、高性能、内嵌型、持久化的key-value数据库。是我对Nosql的一个阶段性的实践。
+
+NutsDB支持事务，从v0.2.0之后的版本开始支持ACID的特性，建议使用最新的版本。
+
+所有的操作都在事务中执行。NutsDB从v0.2.0版本开始支持多种数据结构，如列表(list)、集合(set)、有序集合(sorted set)。
+
+
+## 项目地址
+
+https://github.com/xujiajun/nutsdb
+
+
+欢迎找我一起交流。
+
+
