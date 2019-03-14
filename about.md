@@ -5,7 +5,7 @@ title: About
 
 <img style="height:290px;" src="/images/me.jpg">
 
-Hi，我叫徐佳军(网名xujiajun)。
+Hi，我叫徐佳军(网名xujiajun)。目前在杭州一个创业公司担任技术合伙人。
 
 
 开源项目： 
