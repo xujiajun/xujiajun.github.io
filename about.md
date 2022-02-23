@@ -22,4 +22,9 @@ A tokenizer based on the dictionary and Bigram language models for Golang. (Now 
 
 欢迎来到我的博客与我交流。
 
+> 欢迎关注我的公众号：
+
+![扫码_搜索联合传播样式-白色版](https://user-images.githubusercontent.com/6065007/155330175-e6c83ee5-8cf9-402e-8119-acb74f07eab1.png)
+
+
 have a nice day. ♥
