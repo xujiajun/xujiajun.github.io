@@ -1,6 +1,13 @@
-本文来自公众号『太白技术』。
+---
+layout: post
+title: 谷歌工程实践 | 学习笔记
+disqus: y
+---
 
-![太白技术公号二维码1](https://user-images.githubusercontent.com/6065007/155888114-d63d6e7f-52dc-4db7-a11a-876364fa6fb3.jpg)
+以下摘自我公众号『太白技术』的内容：
+
+
+![太白技术公号二维码1](https://user-images.githubusercontent.com/6065007/155888234-397a5416-b9f3-48b0-a471-69bc9778ec82.jpg)
 
 
 你好，我是太白。
