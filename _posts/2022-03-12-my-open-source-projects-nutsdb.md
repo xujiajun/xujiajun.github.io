@@ -8,7 +8,7 @@ disqus: y
 
 以下摘自我公众号『太白技术』的内容：
 
-原文：https://mp.weixin.qq.com/s/jrx9AHt49WP913CxiY7ewQ
+原文：<a href="https://mp.weixin.qq.com/s/jrx9AHt49WP913CxiY7ewQ">https://mp.weixin.qq.com/s/jrx9AHt49WP913CxiY7ewQ</a>
 
 ![太白技术公号二维码1](https://user-images.githubusercontent.com/6065007/155888234-397a5416-b9f3-48b0-a471-69bc9778ec82.jpg)
 
